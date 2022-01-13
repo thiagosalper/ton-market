@@ -11,15 +11,15 @@ interface TonColorsInterface {
 
 const colors: TonColorsInterface = {
   primary: {
-    dark: 'red',
-    default: 'tomato',
+    dark: '#A30',
+    default: '#D30',
   },
   secondary: {
-    dark: 'green',
-    default: 'acqua',
+    dark: '#1AD',
+    default: '#9CD',
   },
   black: {
-    dark: 'black',
+    dark: '#000',
     default: '#333',
   },
 };

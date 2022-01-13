@@ -12,7 +12,7 @@ const TonButton: React.FC<TonButtonInterface> = (props) => {
   return (
     <TouchableOpacity 
       onPress={defaultAction}
-      style={defaultStyle}>
+      style={[styles.base, defaultStyle]}>
       <TonText>{props.label}</TonText>
     </TouchableOpacity>
   );
@@ -27,17 +27,21 @@ interface TonButtonInterface {
 }
 
 interface TonButtonStylesInterface {
+  base: ViewStyle;
   default: ViewStyle;
   loading: ViewStyle;
 }
 
 const styles = StyleSheet.create<TonButtonStylesInterface>({
-  default: {
+  base: {
     paddingVertical: 10,
+    borderRadius: 8,
+    paddingHorizontal: 16,
+  },
+  default: {
     backgroundColor: TonColors.primary.dark,
   },
   loading: {
-    paddingVertical: 10,
     backgroundColor: TonColors.black.default,
   }
 });

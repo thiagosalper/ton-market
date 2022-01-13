@@ -1,13 +1,17 @@
-import { useNavigation } from "@react-navigation/core";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Product, ProductRepository } from "../../../data";
-import { MainRouteProps } from "../../../routers/types";
+import { useProducts } from "../context";
 import { ProductsViewModel } from "../interfaces";
+import { useDispatch } from 'react-redux';
+import { useSelectorTyped } from "../../../utils/hooks/useSelectorTyped";
+import { PROD_ACTIONS } from "../../../store/actions";
 
 const useProductsViewModel = (): ProductsViewModel => {
   const [loading, setLoading] = useState<boolean>(true);
   const [products, setProducts] = useState<Product[] | undefined>();
-  const navigation = useNavigation<MainRouteProps>();
+  const productContext = useProducts();
+  const dispatch = useDispatch();
+  const {cart} = useSelectorTyped((store) => store.products);
 
   const fetchProducts = useCallback( async () => {
     try {
@@ -15,7 +19,7 @@ const useProductsViewModel = (): ProductsViewModel => {
       const response = await ProductRepository.get();
       setProducts(response);
     } catch (error) {
-      //
+      // log de erro
     } finally {
       setLoading(false);
     }
@@ -26,11 +30,20 @@ const useProductsViewModel = (): ProductsViewModel => {
   }, [fetchProducts]);
 
   function addProduct(product: Product) {
-    navigation.navigate('CartRoute');
+    const newlist = cart;
+    newlist.push(product);
+    dispatch({ type: PROD_ACTIONS.ADD_PRODUCT, payload: newlist});
   }
 
   function removeProduct() {
     //
+  }
+
+  /**
+   * Funcionalidade incompleta, não consegui terminar a tempo
+   */
+  function onCompare(product: Product) {
+    productContext.setSelection(product);
   }
 
  return {
@@ -38,6 +51,8 @@ const useProductsViewModel = (): ProductsViewModel => {
    addProduct,
    removeProduct,
    loading,
+   selection: productContext.selection,
+   onCompare,
  }
 }
 

@@ -1,6 +1,7 @@
+import { Product } from "..";
 import { CartItem } from "./cartItem.model";
 
 export interface Cart {
   total: number;
-  products: CartItem[] | undefined;
+  products: Product[] | undefined;
 };
