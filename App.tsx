@@ -1,10 +1,12 @@
 import React from 'react';
-import { ProductRepository } from './src/data';
+import { ProductsProvider } from './src/features/products/context';
 import { MainNavigator } from './src/routers';
 
 const App: React.FC = () => {
   return (
-    <MainNavigator />
+    <ProductsProvider>
+      <MainNavigator />
+    </ProductsProvider>
   );
 };
 
