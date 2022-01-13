@@ -5,6 +5,7 @@ const TAG_ERROR = 'ERROR_';
 
 interface TonMarketApiInterface {
   execute<T>(endpoint: string, method: Method, body?: unknown, headers?: Headers): Promise<T>;
+  getInstance(): AxiosInstance;
 }
 
 class TonApi implements TonMarketApiInterface {
@@ -25,16 +26,23 @@ class TonApi implements TonMarketApiInterface {
 
   execute<T>(endpoint: string, method: Method, body?: unknown, headers?: Headers): Promise<T> {
     return new Promise<T>((resolve, reject) => {
-      return this.api.request<T>({ method, endpoint, headers })
+      return this.api.request<T>({ method, url: endpoint, headers })
         .then((response: AxiosResponse<T>) => {
           console.log(TAG_RESPONSE, response);
           resolve(response.data);
         })
         .catch((apiError) => {
           console.log(TAG_ERROR, apiError);
-          reject(apiError);
+          reject({
+            statusCode: apiError.response?.status,
+            message: apiError.message,
+          });
         });
     });
+  }
+
+  getInstance() {
+    return this.api;
   }
 
 }
