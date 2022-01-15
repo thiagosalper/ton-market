@@ -20,6 +20,7 @@ const BoxProduct: React.FC<BoxProductInterface> = ({item, addItem, removeItem, o
       <TonText>{item.price}</TonText>
       <TonButton label={'ADICIONAR'} onPress={addItem} />
       <TouchableOpacity onPress={onCompare}><TonText>Comparar</TonText></TouchableOpacity>
+      <TouchableOpacity onPress={removeItem}><TonText>REMOVER</TonText></TouchableOpacity>
     </View>
   )
 };

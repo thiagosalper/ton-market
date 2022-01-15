@@ -2,16 +2,13 @@ import { useCallback, useEffect, useState } from "react";
 import { Product, ProductRepository } from "../../../data";
 import { useProducts } from "../context";
 import { ProductsViewModel } from "../interfaces";
-import { useDispatch } from 'react-redux';
-import { useSelectorTyped } from "../../../utils/hooks/useSelectorTyped";
-import { PROD_ACTIONS } from "../../../store/actions";
+import { useProductActions } from "../../../store";
 
 const useProductsViewModel = (): ProductsViewModel => {
   const [loading, setLoading] = useState<boolean>(true);
   const [products, setProducts] = useState<Product[] | undefined>();
   const productContext = useProducts();
-  const dispatch = useDispatch();
-  const {cart} = useSelectorTyped((store) => store.products);
+  const prodAction = useProductActions();
 
   const fetchProducts = useCallback( async () => {
     try {
@@ -30,18 +27,13 @@ const useProductsViewModel = (): ProductsViewModel => {
   }, [fetchProducts]);
 
   function addProduct(product: Product) {
-    const newlist = cart;
-    newlist.push(product);
-    dispatch({ type: PROD_ACTIONS.ADD_PRODUCT, payload: newlist});
+    prodAction.add(product);
   }
 
-  function removeProduct() {
-    //
+  function removeProduct(id: number) {
+    prodAction.remove(id);
   }
 
-  /**
-   * Funcionalidade incompleta, não consegui terminar a tempo
-   */
   function onCompare(product: Product) {
     productContext.setSelection(product);
   }

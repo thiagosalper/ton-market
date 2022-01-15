@@ -22,6 +22,8 @@ export const ProductReducer = (
       return { ...state, cart: action.payload };
     case PROD_ACTIONS.REMOVE_PRODUCT:
       return { ...state, cart: action.payload };
+    case PROD_ACTIONS.CLEAR_CART:
+      return { ...state, cart: [] };
     default:
       return state;
   }

@@ -1,16 +1,23 @@
 import { CartViewModel } from "../interfaces";
 import { useSelectorTyped } from "../../../utils/hooks/useSelectorTyped";
+import { useProductActions } from "../../../store";
 
 const useCartViewModel: () => CartViewModel = () => {
   const { cart } = useSelectorTyped((store) => store.products); 
+  const prodActions = useProductActions();
   
-  function removeProduct() {
-    //
+  function removeProduct(id: number) {
+    prodActions.remove(id);
   }
 
-  function sumTotalPrice() {
+  function sumTotalPrice(): number {
     let total = 0;
-    return cart.forEach((item) => total += item.price);
+    cart.forEach((item) => total += item.price);
+    return total;
+  }
+
+  function clearAll() {
+    prodActions.removeAll();
   }
 
   return {
@@ -19,6 +26,7 @@ const useCartViewModel: () => CartViewModel = () => {
       products: cart
     },
     removeProduct,
+    clearAll,
   }
 };
 
