@@ -2,13 +2,13 @@ import { useCallback, useEffect, useState } from "react";
 import { Product, ProductRepository } from "../../../data";
 import { useProducts } from "../context";
 import { ProductsViewModel } from "../interfaces";
-import { useProductActions } from "../../../store";
+import { useCartActions } from "../../../store";
 
 const useProductsViewModel = (): ProductsViewModel => {
   const [loading, setLoading] = useState<boolean>(true);
   const [products, setProducts] = useState<Product[] | undefined>();
   const productContext = useProducts();
-  const prodAction = useProductActions();
+  const prodAction = useCartActions();
 
   const fetchProducts = useCallback( async () => {
     try {
