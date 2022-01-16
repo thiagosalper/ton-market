@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
+import { TouchableOpacity, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import TonText from '../tonText';
 import TonColors from '../colors';
 
@@ -12,8 +12,8 @@ const TonButton: React.FC<TonButtonInterface> = (props) => {
   return (
     <TouchableOpacity 
       onPress={defaultAction}
-      style={[styles.base, defaultStyle]}>
-      <TonText>{props.label}</TonText>
+      style={[styles.base, defaultStyle, props.style]}>
+      <TonText style={[styles.baseLabel, props.styleLabel || {}]}>{props.label}</TonText>
     </TouchableOpacity>
   );
 };
@@ -24,12 +24,15 @@ interface TonButtonInterface {
   label: string;
   loading?: boolean;
   onPress(): void;
+  style?: ViewStyle;
+  styleLabel?: TextStyle;
 }
 
 interface TonButtonStylesInterface {
   base: ViewStyle;
   default: ViewStyle;
   loading: ViewStyle;
+  baseLabel: TextStyle;
 }
 
 const styles = StyleSheet.create<TonButtonStylesInterface>({
@@ -37,11 +40,18 @@ const styles = StyleSheet.create<TonButtonStylesInterface>({
     paddingVertical: 10,
     borderRadius: 8,
     paddingHorizontal: 16,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   default: {
-    backgroundColor: TonColors.primary.dark,
+    backgroundColor: TonColors.secondary.dark,
   },
   loading: {
     backgroundColor: TonColors.black.default,
+  }, 
+  baseLabel: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold',
   }
 });

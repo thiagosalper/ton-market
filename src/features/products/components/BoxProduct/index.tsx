@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, ViewStyle, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, ViewStyle, TouchableOpacity, TextStyle} from 'react-native';
 import { Product } from '../../../../data';
 import { TonButton, TonText } from '../../../../ui';
 
@@ -16,11 +16,11 @@ const BoxProduct: React.FC<BoxProductInterface> = ({item, addItem, removeItem, o
       <View style={styles.image}>
 
       </View>
-      <TonText>{item.name}</TonText>
+      <TonText style={styles.title}>{item.name}</TonText>
       <TonText>{item.price}</TonText>
       <TonButton label={'ADICIONAR'} onPress={addItem} />
+      <TonButton label={'REMOVER'} onPress={removeItem} style={styles.removeButton} />
       <TouchableOpacity onPress={onCompare}><TonText>Comparar</TonText></TouchableOpacity>
-      <TouchableOpacity onPress={removeItem}><TonText>REMOVER</TonText></TouchableOpacity>
     </View>
   )
 };
@@ -30,6 +30,8 @@ export default BoxProduct;
 interface BoxProductStyleInterface {
   base: ViewStyle;
   image: ViewStyle;
+  removeButton: ViewStyle;
+  title: TextStyle;
 }
 
 const styles = StyleSheet.create<BoxProductStyleInterface>({
@@ -44,5 +46,12 @@ const styles = StyleSheet.create<BoxProductStyleInterface>({
     width: 80,
     height: 80,
     borderRadius: 8,
+  },
+  removeButton: {
+    backgroundColor: 'tomato',
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 16,
   }
 });

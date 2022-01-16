@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextStyle, StyleSheet, View, ViewStyle, FlatList } from 'react-native';
-import { TonButton, TonText } from '../../../ui';
+import { TonButton, TonColors, TonText } from '../../../ui';
 import ItemCart from '../components/itemCart';
 import { CartViewModel } from '../interfaces';
 import useCartViewModel from '../viewModel/cart.vm';
@@ -18,7 +18,11 @@ const CartView: React.FC = () => {
         showsVerticalScrollIndicator={false}
       />
       <TonText style={styles.title}>Total a pagar: ${vm.list.total}</TonText>
-      <TonButton label='LIMPAR' onPress={vm.clearAll} />
+      <TonButton 
+        label='LIMPAR' 
+        onPress={vm.clearAll} 
+        style={styles.clearButton}
+        styleLabel={styles.clearButtonLabel} />
     </View>
   )
 };
@@ -28,6 +32,8 @@ export default CartView;
 interface ProductsViewStyleInterface {
   container: ViewStyle;
   title: TextStyle;
+  clearButton: ViewStyle;
+  clearButtonLabel: TextStyle;
 }
 
 const styles = StyleSheet.create<ProductsViewStyleInterface>({
@@ -41,5 +47,11 @@ const styles = StyleSheet.create<ProductsViewStyleInterface>({
     fontSize: 18,
     textAlign: 'center',
     paddingVertical: 20,
+  }, 
+  clearButton: {
+    backgroundColor: TonColors.black.default,
+  },
+  clearButtonLabel: {
+    color: 'white',
   }
 });
