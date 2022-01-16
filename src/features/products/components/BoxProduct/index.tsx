@@ -8,9 +8,10 @@ interface BoxProductInterface {
   addItem(): void;
   removeItem(): void;
   onCompare(): void;
+  isCartItem?: boolean;
 }
 
-const BoxProduct: React.FC<BoxProductInterface> = ({item, addItem, removeItem, onCompare}) => {
+const BoxProduct: React.FC<BoxProductInterface> = ({item, addItem, removeItem, onCompare, isCartItem}) => {
   return (
     <View style={styles.base}>
       <View style={styles.image}>
@@ -18,8 +19,11 @@ const BoxProduct: React.FC<BoxProductInterface> = ({item, addItem, removeItem, o
       </View>
       <TonText style={styles.title}>{item.name}</TonText>
       <TonText>{item.price}</TonText>
-      <TonButton label={'ADICIONAR'} onPress={addItem} />
-      <TonButton label={'REMOVER'} onPress={removeItem} style={styles.removeButton} />
+      {!isCartItem ? (
+        <TonButton label={'ADICIONAR'} onPress={addItem} />
+      ) : (
+        <TonButton label={'REMOVER'} onPress={removeItem} style={styles.removeButton} />
+      )}
       <TouchableOpacity onPress={onCompare}><TonText>Comparar</TonText></TouchableOpacity>
     </View>
   )

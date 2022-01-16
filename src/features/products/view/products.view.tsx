@@ -17,6 +17,7 @@ const ProductsView: React.FC = () => {
         {!vm.loading && vm.list && vm.list.map((item) => (
           <BoxProduct 
             item={item} 
+            isCartItem={vm.checkIsCartItem(item.id)}
             addItem={() => vm.addProduct(item)} 
             removeItem={() => vm.removeProduct(item.id)} 
             onCompare={() => vm.onCompare(item)} />

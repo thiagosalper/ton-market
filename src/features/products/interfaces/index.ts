@@ -7,4 +7,5 @@ export interface ProductsViewModel {
   onCompare(product: Product): void;
   loading: boolean;
   selection: Product[];
+  checkIsCartItem(id: number): boolean;
 }
