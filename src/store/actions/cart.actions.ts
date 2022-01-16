@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { PROD_ACTIONS } from ".";
+import { CART_ACTIONS } from ".";
 import { Product } from "../../data";
 import { useSelectorTyped } from "../../utils/hooks/useSelectorTyped";
 
@@ -9,25 +9,25 @@ interface CartActionsInterface {
   removeAll(): void;
 }
 
-const useProductActions: () => CartActionsInterface = () => {
+const useCartActions: () => CartActionsInterface = () => {
   const dispatch = useDispatch();
-  const { cart } = useSelectorTyped((store) => store.products);
+  const { cart } = useSelectorTyped((store) => store.cart);
 
   function add(item: Product) {
     const newList = cart;
     newList.push(item);
-    dispatch({ type: PROD_ACTIONS.ADD_PRODUCT, payload: newList});
+    dispatch({ type: CART_ACTIONS.ADD_PRODUCT, payload: newList});
   }
 
   function remove(id: number) {
     const newList = cart;
     const indexRemoved = cart.findIndex((item: Product) => item.id === id);
     newList.splice(indexRemoved, 1);
-    dispatch({ type: PROD_ACTIONS.REMOVE_PRODUCT, payload: newList });
+    dispatch({ type: CART_ACTIONS.REMOVE_PRODUCT, payload: newList });
   }
 
   function removeAll() {
-    dispatch({ type: PROD_ACTIONS.CLEAR_CART });
+    dispatch({ type: CART_ACTIONS.CLEAR_CART });
   }
 
   return {
@@ -37,4 +37,4 @@ const useProductActions: () => CartActionsInterface = () => {
   }
 }
 
-export default useProductActions;
+export default useCartActions;

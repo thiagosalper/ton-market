@@ -1,9 +1,9 @@
 import { combineReducers, createStore } from 'redux';
-import { ProductReducer } from './reducer/product.reducer';
-export { useProductActions, PROD_ACTIONS } from './actions';
+import { CartReducer } from './reducer/cart.reducer';
+export { useCartActions, CART_ACTIONS } from './actions';
 
 const combinedReducer = combineReducers({
-  products: ProductReducer,
+  cart: CartReducer,
 })
 
 export const store = createStore(combinedReducer);

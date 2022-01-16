@@ -1,10 +1,10 @@
 import { CartViewModel } from "../interfaces";
 import { useSelectorTyped } from "../../../utils/hooks/useSelectorTyped";
-import { useProductActions } from "../../../store";
+import { useCartActions } from "../../../store";
 
 const useCartViewModel: () => CartViewModel = () => {
-  const { cart } = useSelectorTyped((store) => store.products); 
-  const prodActions = useProductActions();
+  const { cart } = useSelectorTyped((store) => store.cart); 
+  const prodActions = useCartActions();
   
   function removeProduct(id: number) {
     prodActions.remove(id);
