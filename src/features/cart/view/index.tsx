@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextStyle, StyleSheet, View, ViewStyle, FlatList } from 'react-native';
 import { TonButton, TonColors, TonText } from '../../../ui';
+import moneyFormat from '../../../utils/number/moneyFormat';
 import ItemCart from '../components/itemCart';
 import { CartViewModel } from '../interfaces';
 import useCartViewModel from '../viewModel/cart.vm';
@@ -17,7 +18,7 @@ const CartView: React.FC = () => {
         )}
         showsVerticalScrollIndicator={false}
       />
-      <TonText style={styles.title}>Total a pagar: ${vm.list.total}</TonText>
+      <TonText style={styles.title}>Total a pagar: {moneyFormat(vm.list.total)}</TonText>
       <TonButton 
         label='LIMPAR' 
         onPress={vm.clearAll} 

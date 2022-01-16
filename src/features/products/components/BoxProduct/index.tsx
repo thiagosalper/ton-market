@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet, ViewStyle, TouchableOpacity, TextStyle} from 'react-native';
 import { Product } from '../../../../data';
 import { TonButton, TonText } from '../../../../ui';
+import moneyFormat from '../../../../utils/number/moneyFormat';
 
 interface BoxProductInterface {
   item: Product; 
@@ -18,7 +19,7 @@ const BoxProduct: React.FC<BoxProductInterface> = ({item, addItem, removeItem, o
 
       </View>
       <TonText style={styles.title}>{item.name}</TonText>
-      <TonText>{item.price}</TonText>
+      <TonText>{moneyFormat(item.price)}</TonText>
       {!isCartItem ? (
         <TonButton label={'ADICIONAR'} onPress={addItem} />
       ) : (
