@@ -1,6 +1,7 @@
 interface ColorSchema {
   dark: string;
   default: string;
+  light?: string;
 }
 
 interface TonColorsInterface {
@@ -21,6 +22,7 @@ const colors: TonColorsInterface = {
   black: {
     dark: '#000',
     default: '#333',
+    light: '#999',
   },
 };
 

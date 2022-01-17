@@ -14,7 +14,12 @@ const CartView: React.FC = () => {
       <FlatList
         data={vm.list.products}
         renderItem={({item, index}) => (
-          <ItemCart key={index} item={item} removeItem={() => vm.removeProduct(item.product.id)} />
+          <ItemCart 
+            key={index} 
+            item={item} 
+            increment={() => vm.increment(item.product)}
+            decrement={() => vm.decrement(item.product)}
+            removeItem={() => vm.removeProduct(item.product.id)} />
         )}
         showsVerticalScrollIndicator={false}
       />

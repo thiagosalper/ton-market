@@ -1,15 +1,22 @@
 import React from 'react';
 import {View, StyleSheet, ViewStyle, TouchableOpacity, TextStyle} from 'react-native';
-import { CartItem, Product } from '../../../../data';
-import { TonText } from '../../../../ui';
+import { CartItem } from '../../../../data';
+import { TonButton, TonColors, TonText } from '../../../../ui';
 import moneyFormat from '../../../../utils/number/moneyFormat';
 
 interface ItemCartInterface {
   item: CartItem;
   removeItem(): void;
+  increment(): void;
+  decrement(): void;
 }
 
-const ItemCart: React.FC<ItemCartInterface> = ({item, removeItem}) => {
+const ItemCart: React.FC<ItemCartInterface> = ({
+  item, 
+  removeItem, 
+  increment, 
+  decrement
+}) => {
   return (
     <View style={styles.base}>
       <View style={styles.image}></View>
@@ -17,6 +24,11 @@ const ItemCart: React.FC<ItemCartInterface> = ({item, removeItem}) => {
         <TonText style={styles.title}>{item.product.name}</TonText>
         <TonText>Unitário: {moneyFormat(item.product.price)}</TonText>
         <TonText>Subtotal: {moneyFormat(item.product.price * item.quantity)}</TonText>
+        <View style={styles.baseActions}>
+          <TonButton onPress={increment} label='+' style={styles.miniButton} />
+          <TonText style={{fontSize: 18, fontWeight: 'bold'}}>{item.quantity}  </TonText>
+          <TonButton onPress={decrement} label='-' style={styles.miniButton} />
+        </View>
       </View>
       <TouchableOpacity 
         style={styles.removeButton}
@@ -34,6 +46,8 @@ interface ItemCartStyleInterface {
   image: ViewStyle;
   title: TextStyle;
   removeButton: ViewStyle;
+  miniButton: ViewStyle;
+  baseActions: ViewStyle;
 }
 
 const styles = StyleSheet.create<ItemCartStyleInterface>({
@@ -42,7 +56,7 @@ const styles = StyleSheet.create<ItemCartStyleInterface>({
     flexDirection: 'row',
   },
   image: {
-    backgroundColor: '#ccc',
+    backgroundColor: TonColors.black.light,
     width: 60,
     height: 60,
     borderRadius: 8,
@@ -62,5 +76,12 @@ const styles = StyleSheet.create<ItemCartStyleInterface>({
     position: 'absolute',
     right: 0,
     top: '50%',
+  },
+  miniButton: {
+    backgroundColor: TonColors.black.light,
+    marginRight: 8,
+  },
+  baseActions: {
+    flexDirection: 'row',
   }
 });

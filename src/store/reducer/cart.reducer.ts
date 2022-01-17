@@ -19,6 +19,10 @@ export const CartReducer: Reducer<CartReducerInterface> = (
       return { ...state, cart: action.payload };
     case CART_ACTIONS.REMOVE_PRODUCT:
       return { ...state, cart: action.payload };
+    case CART_ACTIONS.INCREMENT_CART:
+      return { ...state, cart: action.payload };
+    case CART_ACTIONS.DECREMENT_CART:
+      return { ...state, cart: action.payload };
     case CART_ACTIONS.CLEAR_CART:
       return { ...state, cart: [] };
     default:

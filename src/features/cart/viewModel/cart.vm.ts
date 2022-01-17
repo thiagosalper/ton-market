@@ -1,13 +1,14 @@
 import { CartViewModel } from "../interfaces";
 import { useSelectorTyped } from "../../../store/hooks/useSelectorTyped";
 import { useCartActions } from "../../../store";
+import { Product } from "../../../data";
 
 const useCartViewModel: () => CartViewModel = () => {
   const { cart } = useSelectorTyped((store) => store.cart); 
-  const prodActions = useCartActions();
+  const cartActions = useCartActions();
   
   function removeProduct(id: number) {
-    prodActions.remove(id);
+    cartActions.remove(id);
   }
 
   function sumTotalPrice(): number {
@@ -17,7 +18,15 @@ const useCartViewModel: () => CartViewModel = () => {
   }
 
   function clearAll() {
-    prodActions.removeAll();
+    cartActions.removeAll();
+  }
+
+  function increment(item: Product) {
+    cartActions.incrementQuantity(item);
+  }
+
+  function decrement(item: Product) {
+    cartActions.decrementQuantity(item);
   }
 
   return {
@@ -27,6 +36,8 @@ const useCartViewModel: () => CartViewModel = () => {
     },
     removeProduct,
     clearAll,
+    increment,
+    decrement,
   }
 };
 

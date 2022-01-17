@@ -7,6 +7,8 @@ interface CartActionsInterface {
   add(item: Product): void;
   remove(id: number): void;
   removeAll(): void;
+  incrementQuantity(item: Product): void;
+  decrementQuantity(item: Product): void;
 }
 
 const useCartActions: () => CartActionsInterface = () => {
@@ -34,10 +36,36 @@ const useCartActions: () => CartActionsInterface = () => {
     dispatch({ type: CART_ACTIONS.CLEAR_CART });
   }
 
+  function incrementQuantity(item: Product) {
+    dispatch({ type: CART_ACTIONS.INCREMENT_CART, payload: setQttList(item.id, 'INCREMENT') });
+  }
+
+  function decrementQuantity(item: Product) {
+    dispatch({ type: CART_ACTIONS.DECREMENT_CART, payload: clearEmptyQtts(setQttList(item.id, 'DECREMENT')) });
+  }
+
+  function setQttList(id: number, type: 'INCREMENT' | 'DECREMENT'): CartItem[] {
+    const newList = cart;
+    return newList.map((itemList) => updateQuantityFromItem(itemList, id, type));
+  }
+
+  function updateQuantityFromItem(item: CartItem, idToFind: number, type: 'INCREMENT' | 'DECREMENT'): CartItem {
+    if (item.product.id === idToFind) {
+      return {...item, quantity: type === 'INCREMENT' ? item.quantity + 1 : item.quantity - 1};
+    }
+    return item;
+  }
+
+  function clearEmptyQtts(list: CartItem[]): CartItem[] {
+    return list.filter((itemList) => itemList.quantity > 0)
+  }
+
   return {
     add,
     remove,
     removeAll,
+    incrementQuantity,
+    decrementQuantity,
   }
 }
 
