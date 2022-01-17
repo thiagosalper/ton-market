@@ -4,7 +4,7 @@ import { TonText } from '..';
 
 type FeedBoxTypes = 'success' | 'error' | 'info';
 
-interface FeedbackBoxInterface {
+export interface FeedbackBoxInterface {
   type: FeedBoxTypes;
   text: string;
   callback(): void;
@@ -28,7 +28,7 @@ const FeedbackBox: React.FC<FeedbackBoxInterface> = ({
   }, []);
 
   return (
-    <View style={[styles.base, styleTypes[type]]}>
+    <View style={[styles.base, styleTypes[type]]} testID={`boxfeedback_${type}`}>
       <TonText style={styles.message} adjustsFontSizeToFit>{text}</TonText>
     </View>
   );
