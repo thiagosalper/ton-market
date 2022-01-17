@@ -1,5 +1,5 @@
 import { CartViewModel } from "../interfaces";
-import { useSelectorTyped } from "../../../utils/hooks/useSelectorTyped";
+import { useSelectorTyped } from "../../../store/hooks/useSelectorTyped";
 import { useCartActions } from "../../../store";
 
 const useCartViewModel: () => CartViewModel = () => {
@@ -12,7 +12,7 @@ const useCartViewModel: () => CartViewModel = () => {
 
   function sumTotalPrice(): number {
     let total = 0;
-    cart.forEach((item) => total += item.price);
+    cart.forEach((item) => total += (item.product.price * item.quantity));
     return total;
   }
 

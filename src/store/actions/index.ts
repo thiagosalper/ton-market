@@ -1,4 +1,4 @@
-import { Product } from "../../data";
+import { CartItem } from "../../data";
 
 export enum CART_ACTIONS {
   ADD_PRODUCT = 'ADD_PRODUCT',
@@ -8,12 +8,12 @@ export enum CART_ACTIONS {
 
 interface actionAddProduct {
   type: CART_ACTIONS.ADD_PRODUCT;
-  payload: Product[];
+  payload: CartItem[];
 }
 
 interface actionRemoveProduct {
   type: CART_ACTIONS.REMOVE_PRODUCT;
-  payload: Product[];
+  payload: CartItem[];
 }
 
 interface actionClearCart {

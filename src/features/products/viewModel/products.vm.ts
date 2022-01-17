@@ -3,7 +3,7 @@ import { Product, ProductRepository } from "../../../data";
 import { useProducts } from "../context";
 import { ProductsViewModel } from "../interfaces";
 import { useCartActions } from "../../../store";
-import { useSelectorTyped } from "../../../utils/hooks/useSelectorTyped";
+import { useSelectorTyped } from "../../../store/hooks/useSelectorTyped";
 
 const useProductsViewModel: () => ProductsViewModel = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -41,7 +41,7 @@ const useProductsViewModel: () => ProductsViewModel = () => {
   }
 
   function checkIsCartItem(id: number) {
-    return cart.some((item) => item.id === id);
+    return cart.some((item) => item.product.id === id);
   }
 
  return {

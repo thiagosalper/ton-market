@@ -1,8 +1,12 @@
 import { combineReducers, createStore } from 'redux';
-import { CartReducer } from './reducer/cart.reducer';
+import { CartReducer, CartReducerInterface } from './reducer/cart.reducer';
 export { useCartActions, CART_ACTIONS } from './actions';
 
-const combinedReducer = combineReducers({
+interface StoreInterface {
+  cart: CartReducerInterface;
+}
+
+const combinedReducer = combineReducers<StoreInterface>({
   cart: CartReducer,
 })
 

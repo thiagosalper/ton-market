@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, StyleSheet, ViewStyle, TouchableOpacity, TextStyle} from 'react-native';
-import { Product } from '../../../../data';
+import { CartItem, Product } from '../../../../data';
 import { TonText } from '../../../../ui';
 import moneyFormat from '../../../../utils/number/moneyFormat';
 
 interface ItemCartInterface {
-  item: Product;
+  item: CartItem;
   removeItem(): void;
 }
 
@@ -14,8 +14,9 @@ const ItemCart: React.FC<ItemCartInterface> = ({item, removeItem}) => {
     <View style={styles.base}>
       <View style={styles.image}></View>
       <View>
-        <TonText style={styles.title}>{item.name}</TonText>
-        <TonText>{moneyFormat(item.price)}</TonText>
+        <TonText style={styles.title}>{item.product.name}</TonText>
+        <TonText>Unitário: {moneyFormat(item.product.price)}</TonText>
+        <TonText>Subtotal: {moneyFormat(item.product.price * item.quantity)}</TonText>
       </View>
       <TouchableOpacity 
         style={styles.removeButton}

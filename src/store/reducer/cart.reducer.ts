@@ -1,22 +1,19 @@
-import { Product } from '../../data';
-import { ActionCartReducer, CART_ACTIONS } from '../actions';
-
-export interface StoreState {
-  product: CartReducerInterface,
-}
+import { Reducer } from 'redux';
+import { CartItem } from '../../data';
+import { CART_ACTIONS } from '../actions';
 
 export interface CartReducerInterface {
-  cart: Product[];
+  cart: CartItem[];
 }
 
 const initialState: CartReducerInterface = {
   cart: [],
 }
 
-export const CartReducer = (
+export const CartReducer: Reducer<CartReducerInterface> = (
   state: CartReducerInterface = initialState, 
-  action: ActionCartReducer
-) => {
+  action
+ ) => {
   switch (action.type) {
     case CART_ACTIONS.ADD_PRODUCT:
       return { ...state, cart: action.payload };
