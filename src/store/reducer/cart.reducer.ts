@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 import { CartItem } from '../../data';
-import { CART_ACTIONS } from '../actions';
+import { ActionCartReducer, CART_ACTIONS } from '../actions';
 
 export interface CartReducerInterface {
   cart: CartItem[];
@@ -12,7 +12,7 @@ const initialState: CartReducerInterface = {
 
 export const CartReducer: Reducer<CartReducerInterface> = (
   state: CartReducerInterface = initialState, 
-  action
+  action: ActionCartReducer
  ) => {
   switch (action.type) {
     case CART_ACTIONS.ADD_PRODUCT:

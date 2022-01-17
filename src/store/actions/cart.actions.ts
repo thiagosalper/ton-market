@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux"
 import { CART_ACTIONS } from ".";
 import { CartItem, Product } from "../../data";
 import { useSelectorTyped } from "../hooks/useSelectorTyped";
+import { APP_ACTIONS } from "./appActions";
 
 interface CartActionsInterface {
   add(item: Product): void;
@@ -30,6 +31,7 @@ const useCartActions: () => CartActionsInterface = () => {
     const indexRemoved = cart.findIndex((item: CartItem) => item.product.id === id);
     newList.splice(indexRemoved, 1);
     dispatch({ type: CART_ACTIONS.REMOVE_PRODUCT, payload: newList });
+    dispatch({ type: APP_ACTIONS.PUSH_FEEDBACK, payload: { type: 'error', text: 'Produto removido do carrinho'}});
   }
 
   function removeAll() {

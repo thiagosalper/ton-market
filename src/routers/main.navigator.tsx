@@ -5,10 +5,15 @@ import { MainNavParamList } from './types';
 import { ProductsView, CartView } from '../features';
 import { TonText } from '../ui';
 import HeaderCartIcon from '../features/products/components/HeaderCartIcon';
+import FeedbackBox from '../ui/tonFeedback';
+import { useSelectorTyped } from '../store/hooks/useSelectorTyped';
+import useAppActions from '../store/actions/appActions';
 
 const RootNav = createNativeStackNavigator<MainNavParamList>();
 
 const MainNavigator: React.FC = () => {
+  const { feedback } = useSelectorTyped((store) => store.app );
+  const appAction = useAppActions();
   return (
     <NavigationContainer>
       <RootNav.Navigator initialRouteName={'ProductsRoute'}>
@@ -28,6 +33,13 @@ const MainNavigator: React.FC = () => {
             headerBackTitle: 'Voltar'
           }} />
       </RootNav.Navigator>
+      { feedback?.text && (
+        <FeedbackBox 
+          type={feedback?.type} 
+          text={feedback?.text} 
+          callback={appAction.clearFeedback} /> 
+        )
+      }
     </NavigationContainer>
   )
 }
