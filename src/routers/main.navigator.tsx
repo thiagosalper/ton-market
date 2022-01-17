@@ -3,9 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { MainNavParamList } from './types';
 import { ProductsView, CartView } from '../features';
-import { TonText } from '../ui';
+import { TonText, TonFeedback } from '../ui';
 import HeaderCartIcon from '../features/products/components/HeaderCartIcon';
-import FeedbackBox from '../ui/tonFeedback';
 import { useSelectorTyped } from '../store/hooks/useSelectorTyped';
 import useAppActions from '../store/actions/appActions';
 
@@ -34,7 +33,7 @@ const MainNavigator: React.FC = () => {
           }} />
       </RootNav.Navigator>
       { feedback?.text && (
-        <FeedbackBox 
+        <TonFeedback 
           type={feedback?.type} 
           text={feedback?.text} 
           callback={appAction.clearFeedback} /> 
